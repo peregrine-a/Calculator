@@ -15,14 +15,23 @@ namespace Calculator
         {
             public override void ProcessNumber(CalculatorCore core, Number token)
             {
-                core.ChangeState(initState);
+                core.ClearNum1();
+                core.PutNum1(token);
+                core.SelectNum1();
+                core.ClearOp();
+
+
+                core.ChangeState(num1State);
             }
             public override void ProcessOperator(CalculatorCore core, Operator token)
             {
-                core.ChangeState(initState);
+                core.SetOp(token);
+
+                core.ChangeState(opState);
             }
             public override void ProcessEqual(CalculatorCore core)
             {
+                core.SelectNum1();
                 core.ChangeState(initState);
             }
 
