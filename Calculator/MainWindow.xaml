@@ -5,8 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Calculator App" Height="320" Width="240" Background="#FF424242">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 電卓計算結果表示用のテキストボックス -->
+        <TextBox x:Name="displayTextBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20">00000000000000000000</TextBox>
+
+        <!-- 数字・小数点ボタン -->
+        <Button x:Name="numButton0"   Grid.Row="5" Grid.Column="0" FontSize="16">0</Button>
+        <Button x:Name="numButton00"  Grid.Row="5" Grid.Column="1" FontSize="16">00</Button>
+        <Button x:Name="numButtonDot" Grid.Row="5" Grid.Column="2" FontSize="16">.</Button>
+        <Button x:Name="numButton1"   Grid.Row="4" Grid.Column="0" FontSize="16">1</Button>
+        <Button x:Name="numButton2"   Grid.Row="4" Grid.Column="1" FontSize="16">2</Button>
+        <Button x:Name="numButton3"   Grid.Row="4" Grid.Column="2" FontSize="16">3</Button>
+        <Button x:Name="numButton4"   Grid.Row="3" Grid.Column="0" FontSize="16">4</Button>
+        <Button x:Name="numButton5"   Grid.Row="3" Grid.Column="1" FontSize="16">5</Button>
+        <Button x:Name="numButton6"   Grid.Row="3" Grid.Column="2" FontSize="16">6</Button>
+        <Button x:Name="numButton7"   Grid.Row="2" Grid.Column="0" FontSize="16">7</Button>
+        <Button x:Name="numButton8"   Grid.Row="2" Grid.Column="1" FontSize="16">8</Button>
+        <Button x:Name="numButton9"   Grid.Row="2" Grid.Column="2" FontSize="16">9</Button>
+
+        <!--- M+/M-/MRCボタン -->
+        <Button x:Name="mpButton"     Grid.Row="1" Grid.Column="0" FontSize="16">M+</Button>
+        <Button x:Name="mmButton"     Grid.Row="1" Grid.Column="1" FontSize="16">M-</Button>
+        <Button x:Name="mrcButton"    Grid.Row="1" Grid.Column="2" FontSize="16">MRC</Button>
+
+        <!-- C/ACボタン -->
+        <Button x:Name="cButton"      Grid.Row="2" Grid.Column="3" FontSize="16">C</Button>
+        <Button x:Name="acButton"     Grid.Row="2" Grid.Column="4" FontSize="16">AC</Button>
+
+        <!-- 演算子系ボタン -->
+        <Button x:Name="plusButton"   Grid.Row="4" Grid.Column="3" Grid.RowSpan="2">＋</Button>
+        <Button x:Name="minusButton"  Grid.Row="4" Grid.Column="4">－</Button>
+        <Button x:Name="multButton"   Grid.Row="3" Grid.Column="3">×</Button>
+        <Button x:Name="divButton"    Grid.Row="3" Grid.Column="4">÷</Button>
+        <Button x:Name="equalButton"  Grid.Row="5" Grid.Column="4">＝</Button>
+
+
     </Grid>
 </Window>
