@@ -30,18 +30,18 @@
                  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20">00000000000000000000</TextBox>
 
         <!-- 数字・小数点ボタン -->
-        <Button x:Name="numButton0"   Grid.Row="5" Grid.Column="0" FontSize="16">0</Button>
-        <Button x:Name="numButton00"  Grid.Row="5" Grid.Column="1" FontSize="16">00</Button>
-        <Button x:Name="numButtonDot" Grid.Row="5" Grid.Column="2" FontSize="16">.</Button>
-        <Button x:Name="numButton1"   Grid.Row="4" Grid.Column="0" FontSize="16">1</Button>
-        <Button x:Name="numButton2"   Grid.Row="4" Grid.Column="1" FontSize="16">2</Button>
-        <Button x:Name="numButton3"   Grid.Row="4" Grid.Column="2" FontSize="16">3</Button>
-        <Button x:Name="numButton4"   Grid.Row="3" Grid.Column="0" FontSize="16">4</Button>
-        <Button x:Name="numButton5"   Grid.Row="3" Grid.Column="1" FontSize="16">5</Button>
-        <Button x:Name="numButton6"   Grid.Row="3" Grid.Column="2" FontSize="16">6</Button>
-        <Button x:Name="numButton7"   Grid.Row="2" Grid.Column="0" FontSize="16">7</Button>
-        <Button x:Name="numButton8"   Grid.Row="2" Grid.Column="1" FontSize="16">8</Button>
-        <Button x:Name="numButton9"   Grid.Row="2" Grid.Column="2" FontSize="16">9</Button>
+        <Button x:Name="numButton0"   Grid.Row="5" Grid.Column="0" FontSize="16" Click="number_Click">0</Button>
+        <Button x:Name="numButton00"  Grid.Row="5" Grid.Column="1" FontSize="16" Click="number_Click">00</Button>
+        <Button x:Name="numButtonDot" Grid.Row="5" Grid.Column="2" FontSize="16" Click="number_Click">.</Button>
+        <Button x:Name="numButton1"   Grid.Row="4" Grid.Column="0" FontSize="16" Click="number_Click">1</Button>
+        <Button x:Name="numButton2"   Grid.Row="4" Grid.Column="1" FontSize="16" Click="number_Click">2</Button>
+        <Button x:Name="numButton3"   Grid.Row="4" Grid.Column="2" FontSize="16" Click="number_Click">3</Button>
+        <Button x:Name="numButton4"   Grid.Row="3" Grid.Column="0" FontSize="16" Click="number_Click">4</Button>
+        <Button x:Name="numButton5"   Grid.Row="3" Grid.Column="1" FontSize="16" Click="number_Click">5</Button>
+        <Button x:Name="numButton6"   Grid.Row="3" Grid.Column="2" FontSize="16" Click="number_Click">6</Button>
+        <Button x:Name="numButton7"   Grid.Row="2" Grid.Column="0" FontSize="16" Click="number_Click">7</Button>
+        <Button x:Name="numButton8"   Grid.Row="2" Grid.Column="1" FontSize="16" Click="number_Click">8</Button>
+        <Button x:Name="numButton9"   Grid.Row="2" Grid.Column="2" FontSize="16" Click="number_Click">9</Button>
 
         <!--- M+/M-/MRCボタン -->
         <Button x:Name="mpButton"     Grid.Row="1" Grid.Column="0" FontSize="16">M+</Button>
@@ -53,11 +53,11 @@
         <Button x:Name="acButton"     Grid.Row="2" Grid.Column="4" FontSize="16">AC</Button>
 
         <!-- 演算子系ボタン -->
-        <Button x:Name="plusButton"   Grid.Row="4" Grid.Column="3" Grid.RowSpan="2">＋</Button>
-        <Button x:Name="minusButton"  Grid.Row="4" Grid.Column="4">－</Button>
-        <Button x:Name="multButton"   Grid.Row="3" Grid.Column="3">×</Button>
-        <Button x:Name="divButton"    Grid.Row="3" Grid.Column="4">÷</Button>
-        <Button x:Name="equalButton"  Grid.Row="5" Grid.Column="4">＝</Button>
+        <Button x:Name="plusButton"   Grid.Row="4" Grid.Column="3" Grid.RowSpan="2" Click="operator_Click">＋</Button>
+        <Button x:Name="minusButton"  Grid.Row="4" Grid.Column="4" Click="operator_Click">－</Button>
+        <Button x:Name="multButton"   Grid.Row="3" Grid.Column="3" Click="operator_Click">×</Button>
+        <Button x:Name="divButton"    Grid.Row="3" Grid.Column="4" Click="operator_Click">÷</Button>
+        <Button x:Name="equalButton"  Grid.Row="5" Grid.Column="4" Click="operator_Click">＝</Button>
 
 
     </Grid>
