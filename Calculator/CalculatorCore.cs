@@ -19,7 +19,7 @@ namespace Calculator
         /// <summary>
         /// 電卓の計算結果値
         /// </summary>
-        public double Result { get; private set; }
+        public decimal Result { get; private set; }
 
         /// <summary>
         /// 電卓の表示文字列
@@ -169,9 +169,9 @@ namespace Calculator
         }
         public void Eval()
         {
-            double value1 = _value1.GetValue();
-            double value2 = _value2.GetValue();
-            double result = 0;
+            decimal value1 = _value1.GetValue();
+            decimal value2 = _value2.GetValue();
+            decimal result = 0;
 
             /* 四則演算の実行 */
             switch (_curOp)

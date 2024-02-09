@@ -59,14 +59,14 @@ namespace Calculator
                 DebugPrint();
             }
         }
-        public void SetValue(double value)
+        public void SetValue(decimal value)
         {
             _digits = value.ToString();
             /* ここに桁数のチェックを入れる. */
         }
-        public double GetValue()
+        public decimal GetValue()
         {
-            return Double.Parse(Digits);
+            return Decimal.Parse(Digits);
         }
 
         public void Reset()
