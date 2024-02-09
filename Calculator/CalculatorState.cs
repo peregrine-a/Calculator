@@ -22,5 +22,8 @@ namespace Calculator
 
         public virtual void ProcessAllClear(CalculatorCore core) { }
 
+        public virtual void DebugPrint(CalculatorCore core) { }
+
+
     }
 }

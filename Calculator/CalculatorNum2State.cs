@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+
 
 namespace Calculator
 {
@@ -22,12 +24,33 @@ namespace Calculator
             public override void ProcessOperator(CalculatorCore core, Operator token)
             {
                 core.Eval();
-                core.ChangeState(initState);
+                core.SetOp(token);
+                core.ChangeState(opState);
             }
             public override void ProcessEqual(CalculatorCore core)
             {
                 core.Eval();
                 core.ChangeState(initState);
+            }
+
+            public override void ProcessClear(CalculatorCore core)
+            {
+                core.ClearNum2();
+                core.SelectNum2();
+            }
+
+            public override void ProcessAllClear(CalculatorCore core)
+            {
+                core.ClearNum1();
+                core.ClearNum2();
+                core.ClearOp();
+                core.SelectNum1();
+
+                core.ChangeState(initState);
+            }
+            public override void DebugPrint(CalculatorCore core)
+            {
+                Debug.WriteLine("num2_state:");
             }
         }
 

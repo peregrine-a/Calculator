@@ -27,7 +27,7 @@
         <!-- 電卓計算結果表示用のテキストボックス -->
         <TextBox x:Name="displayTextBox" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20">00000000000000000000</TextBox>
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20">0</TextBox>
 
         <!-- 数字・小数点ボタン -->
         <Button x:Name="numButton0"   Grid.Row="5" Grid.Column="0" FontSize="16" Click="number_Click">0</Button>
@@ -49,8 +49,8 @@
         <Button x:Name="mrcButton"    Grid.Row="1" Grid.Column="2" FontSize="16">MRC</Button>
 
         <!-- C/ACボタン -->
-        <Button x:Name="cButton"      Grid.Row="2" Grid.Column="3" FontSize="16">C</Button>
-        <Button x:Name="acButton"     Grid.Row="2" Grid.Column="4" FontSize="16">AC</Button>
+        <Button x:Name="cButton"      Grid.Row="2" Grid.Column="3" FontSize="16" Click="cButton_Click">C</Button>
+        <Button x:Name="acButton"     Grid.Row="2" Grid.Column="4" FontSize="16" Click="acButton_Click">AC</Button>
 
         <!-- 演算子系ボタン -->
         <Button x:Name="plusButton"   Grid.Row="4" Grid.Column="3" Grid.RowSpan="2" Click="operator_Click">＋</Button>

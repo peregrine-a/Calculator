@@ -83,6 +83,7 @@ namespace Calculator
         {
             // Debug.WriteLine($"ProcessNumber! {token}");
             _curState.ProcessNumber(this, token);
+            _curState.DebugPrint(this);
         }
 
         /// <summary>
@@ -93,6 +94,7 @@ namespace Calculator
         {
             // Debug.WriteLine($"ProcessOperator! {token}");
             _curState.ProcessOperator(this, token);
+            _curState.DebugPrint(this);
         }
 
         /// <summary>
@@ -102,8 +104,28 @@ namespace Calculator
         {
             // Debug.WriteLine("ProcessEqual!");
             _curState.ProcessEqual(this);
+            _curState.DebugPrint(this);
         }
 
+        /// <summary>
+        /// ACボタンの処理
+        /// </summary>
+        public void ProcessAllClear()
+        {
+            // Debug.WriteLine("ProcessEqual!");
+            _curState.ProcessAllClear(this);
+            _curState.DebugPrint(this);
+        }
+
+        /// <summary>
+        /// Cボタンの処理
+        /// </summary>
+        public void ProcessClear()
+        {
+            // Debug.WriteLine("ProcessEqual!");
+            _curState.ProcessClear(this);
+            _curState.DebugPrint(this);
+        }
 
         /// <summary>
         /// 内部ステートの変更を行う.
@@ -171,9 +193,11 @@ namespace Calculator
                     break;
             }
 
-            Debug.WriteLine($"{value1} {_curOp} {value2} = {result}");
+            Debug.WriteLine($"1: {value1} {_curOp} {value2} = {result}");
 
             _result.SetValue(result);
+            _value1.SetValue(result);
+            Debug.WriteLine($"2: {value1} {_curOp} {value2} = {result}");
             Digits = _result.Digits;
         }
 

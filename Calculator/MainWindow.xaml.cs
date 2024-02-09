@@ -126,17 +126,36 @@ namespace Calculator
         }
 
         /// <summary>
-        /// イコールボタンボタンが押された時に実行されるイベントハンドラ.
+        /// イコールボタンが押された時に実行されるイベントハンドラ.
         /// </summary>
         /// <param name="sender">送信元オブジェクト</param>
         /// <param name="e">イベントパラメータ</param>
         private void equalButton_Click(object sender, RoutedEventArgs e)
         {
-            displayTextBox.Text = "Equal";
-
             _core.ProcessEqual();
             displayTextBox.Text = _core.Digits;
+        }
 
+        /// <summary>
+        /// ACボタンが押された時に実行されるイベントハンドラ.
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントパラメータ</param>
+        private void acButton_Click(object sender, RoutedEventArgs e)
+        {
+            _core.ProcessAllClear();
+            displayTextBox.Text = _core.Digits;
+        }
+
+        /// <summary>
+        /// Cボタンが押された時に実行されるイベントハンドラ.
+        /// </summary>
+        /// <param name="sender">送信元オブジェクト</param>
+        /// <param name="e">イベントパラメータ</param>
+        private void cButton_Click(object sender, RoutedEventArgs e)
+        {
+            _core.ProcessClear();
+            displayTextBox.Text = _core.Digits;
         }
     }
 }
