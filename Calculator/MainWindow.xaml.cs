@@ -22,7 +22,7 @@ namespace Calculator
     public partial class MainWindow : Window
     {
         /* Member Variables */
-        private readonly CalculatorCore _core = new CalculatorCore(5);
+        private readonly CalculatorCore _core = new CalculatorCore(20);
 
         /// <summary>
         /// コンストラクタ

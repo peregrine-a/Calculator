@@ -67,7 +67,7 @@ namespace Calculator
 
         private CalculatorValue _value1 = null;
         private CalculatorValue _value2 = null;
-        private CalculatorValue _result = null;
+        // private CalculatorValue _result = null;
 
         /* Methods */
 
@@ -82,7 +82,7 @@ namespace Calculator
             _minValue  = (decimal) (- Math.Pow(10, maxDigits - 1) + 1);
             _value1 = new CalculatorValue(maxDigits);
             _value2 = new CalculatorValue(maxDigits);
-            _result = new CalculatorValue(maxDigits);
+            // _result = new CalculatorValue(maxDigits);
         }
 
         /// <summary>
@@ -242,16 +242,19 @@ namespace Calculator
             }
 
             /* 整数部分の桁数が表示できるかどうかのチェック. */
-            if ((result < _minValue) || (result > _maxValue))
-            {
-                Debug.WriteLine($"hoge! {result} {_minValue} {_maxValue}");
-                return false;
-            }
+            // if ((result < _minValue) || (result > _maxValue))
+            // {
+            //     Debug.WriteLine($"hoge! {result} {_minValue} {_maxValue}");
+            //     return false;
+            // }
 
-            _result.SetValue(result);
-            _value1.SetValue(result);
+            // _result.SetValue(result);
+            bool status = _value1.SetValue(result);
+            if (status == false)
+                return false;
+
             // Debug.WriteLine($"2: {value1} {_curOp} {value2} = {result}");
-            Digits = _result.Digits;
+            Digits = _value1.Digits;
 
             return true;
         }

@@ -73,10 +73,14 @@ namespace Calculator
         /// 値を設定する.
         /// </summary>
         /// <param name="value"> 値 </param>
-        public void SetValue(decimal value)
+        public bool SetValue(decimal value)
         {
-            _digits = value.ToString();
-            /* ここに桁数のチェックを入れる. */
+            string tmp = DigitFormatter.Process(value, _maxDigits);
+            if (tmp == null)
+                return false;
+
+            _digits = tmp;
+            return true;
         }
 
         /// <summary>
