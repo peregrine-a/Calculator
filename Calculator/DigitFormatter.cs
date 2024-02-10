@@ -40,6 +40,7 @@ namespace Calculator
             int numFracDigits = (int) (maxDigits - nums[0].Length - 1 /* 小数点 */);
             
             // 小数点以下を表示する桁数が残っていない場合は整数部分のみを表示する.
+            // 現状は, 最後の桁が小数点になるような場合は, 小数部分自体を表示しない. 
             if(numFracDigits <= 0)
                 return nums[0];
 
