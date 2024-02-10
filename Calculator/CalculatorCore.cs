@@ -86,13 +86,13 @@ namespace Calculator
             HasError = false;
 
         // _result = new CalculatorValue(maxDigits);
-    }
+        }
 
-    /// <summary>
-    /// 数字(小数点を含む)ボタンの処理
-    /// </summary>
-    /// <param name="token"> 数字・小数点を表すトークン </param>
-    public void ProcessNumber(Number token)
+        /// <summary>
+        /// 数字(小数点を含む)ボタンの処理
+        /// </summary>
+        /// <param name="token"> 数字・小数点を表すトークン </param>
+        public void ProcessNumber(Number token)
         {
             // Debug.WriteLine($"ProcessNumber! {token}");
             _curState.ProcessNumber(this, token);

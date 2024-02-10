@@ -20,7 +20,6 @@ namespace Calculator
         /// <returns></returns>
         public static string Process(decimal value, uint maxDigits)
         {
-            Debug.WriteLine($"value: {value.ToString()}");
             string[] nums = value.ToString().Split('.');
             string str = String.Empty;
 

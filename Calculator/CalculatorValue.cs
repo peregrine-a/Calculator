@@ -65,7 +65,7 @@ namespace Calculator
             foreach (char c in s)
             {
                 _PutChar(c);
-                DebugPrint();
+                // DebugPrint();
             }
         }
 
