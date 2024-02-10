@@ -35,8 +35,8 @@ namespace Calculator
         /// <summary>
         /// 数字系のボタンが押された時に実行されるイベントハンドラ.
         /// </summary>
-        /// <param name="sender">送信元オブジェクト</param>
-        /// <param name="e">イベントパラメータ</param>
+        /// <param name="sender"> 送信元オブジェクト </param>
+        /// <param name="e"> イベントパラメータ </param>
         private void number_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -94,8 +94,8 @@ namespace Calculator
         /// <summary>
         /// 演算子系のボタン(加減乗除)が押された時に実行されるイベントハンドラ.
         /// </summary>
-        /// <param name="sender">送信元オブジェクト</param>
-        /// <param name="e">イベントパラメータ</param>
+        /// <param name="sender"> 送信元オブジェクト </param>
+        /// <param name="e"> イベントパラメータ </param>
         private void operator_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
@@ -128,8 +128,8 @@ namespace Calculator
         /// <summary>
         /// イコールボタンが押された時に実行されるイベントハンドラ.
         /// </summary>
-        /// <param name="sender">送信元オブジェクト</param>
-        /// <param name="e">イベントパラメータ</param>
+        /// <param name="sender"> 送信元オブジェクト </param>
+        /// <param name="e"> イベントパラメータ </param>
         private void equalButton_Click(object sender, RoutedEventArgs e)
         {
             _core.ProcessEqual();
@@ -139,8 +139,8 @@ namespace Calculator
         /// <summary>
         /// ACボタンが押された時に実行されるイベントハンドラ.
         /// </summary>
-        /// <param name="sender">送信元オブジェクト</param>
-        /// <param name="e">イベントパラメータ</param>
+        /// <param name="sender"> 送信元オブジェクト </param>
+        /// <param name="e"> イベントパラメータ </param>
         private void acButton_Click(object sender, RoutedEventArgs e)
         {
             _core.ProcessAllClear();
@@ -150,8 +150,8 @@ namespace Calculator
         /// <summary>
         /// Cボタンが押された時に実行されるイベントハンドラ.
         /// </summary>
-        /// <param name="sender">送信元オブジェクト</param>
-        /// <param name="e">イベントパラメータ</param>
+        /// <param name="sender"> 送信元オブジェクト </param>
+        /// <param name="e"> イベントパラメータ </param>
         private void cButton_Click(object sender, RoutedEventArgs e)
         {
             _core.ProcessClear();

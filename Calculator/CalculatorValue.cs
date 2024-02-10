@@ -14,6 +14,10 @@ namespace Calculator
     internal class CalculatorValue
     {
         /* Properties */
+
+        /// <summary>
+        /// 現在の桁表示.
+        /// </summary>
         public string Digits
         {
             get
@@ -37,8 +41,8 @@ namespace Calculator
         /// <summary> 現在の内部ステート </summary>
         State _curState = State.Init;
 
+        /// <summary> 最大桁数 </summary>
         uint _maxDigits;
-
 
         /* Methods */
 
@@ -51,6 +55,11 @@ namespace Calculator
             _maxDigits = maxDigits;
         }
 
+        /// <summary>
+        /// 文字列を追加する.
+        /// 最大の桁数を超えてしまう場合は, 追加できる長さだけ追加する.
+        /// </summary>
+        /// <param name="c"> 追加する文字. </param>
         public void Put(string s)
         {
             foreach (char c in s)
@@ -59,27 +68,47 @@ namespace Calculator
                 DebugPrint();
             }
         }
+
+        /// <summary>
+        /// 値を設定する.
+        /// </summary>
+        /// <param name="value"> 値 </param>
         public void SetValue(decimal value)
         {
             _digits = value.ToString();
             /* ここに桁数のチェックを入れる. */
         }
+
+        /// <summary>
+        /// 現在の整数値の取得.
+        /// </summary>
+        /// <returns> 整数値 </returns>
         public decimal GetValue()
         {
             return Decimal.Parse(Digits);
         }
 
+        /// <summary>
+        /// 状態のリセット.
+        /// </summary>
         public void Reset()
         {
             _digits = String.Empty;
             _curState = State.Init;
         }
 
+        /// <summary>
+        /// デバッグ表示.
+        /// </summary>
         public void DebugPrint()
         {
             Debug.WriteLine($"state= {_curState} _digits= '{_digits}'");
         }
 
+        /// <summary>
+        /// 1文字追加する. 最大の桁数を超えている場合は何もしない.
+        /// </summary>
+        /// <param name="c"> 追加する文字. </param>
         private void _PutChar(char c)
         {
             if (_curState == State.Init)
@@ -154,5 +183,6 @@ namespace Calculator
         {
             return ((_digits.Length + numChars) <= _maxDigits);
         }
+
     }
 }

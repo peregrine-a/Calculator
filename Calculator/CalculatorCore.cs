@@ -127,6 +127,7 @@ namespace Calculator
             _curState.DebugPrint(this);
         }
 
+        /* 以下, ステートクラスから呼び出されるメソッド群. */
         /// <summary>
         /// 内部ステートの変更を行う.
         /// </summary>
@@ -137,36 +138,61 @@ namespace Calculator
             _curState = state;
         }
 
+        /// <summary>
+        /// 1個目の数値に文字列トークンを追加する.
+        /// </summary>
+        /// <param name="state"> 数値トークン </param>
         public void PutNum1(Number token)
         {
             var str = numDict[token];
             _value1.Put(str);
         }
 
+        /// <summary>
+        /// 1個目の数値をクリアする.
+        /// </summary>
         public void ClearNum1()
         {
             _value1.Reset();
         }
 
+        /// <summary>
+        /// 1個目の数値をディスプレイ表示文字列に設定する.
+        /// </summary>
         public void SelectNum1()
         {
             Digits = _value1.Digits;
         }
 
+        /// <summary>
+        /// 2個目の数値に文字列トークンを追加する.
+        /// </summary>
+        /// <param name="state"> 数値トークン </param>
         public void PutNum2(Number token)
         {
             var str = numDict[token];
             _value2.Put(str);
         }
 
+        /// <summary>
+        /// 2個目の数値をクリアする.
+        /// </summary>
         public void ClearNum2()
         {
             _value2.Reset();
         }
+
+        /// <summary>
+        /// 2個目の数値をディスプレイ表示文字列に設定する.
+        /// </summary>
         public void SelectNum2()
         {
             Digits = _value2.Digits;
         }
+
+        /// <summary>
+        /// 現在の数値・演算子を用いて計算を行う.
+        /// </summary>
         public void Eval()
         {
             decimal value1 = _value1.GetValue();
@@ -193,23 +219,27 @@ namespace Calculator
                     break;
             }
 
-            Debug.WriteLine($"1: {value1} {_curOp} {value2} = {result}");
-
             _result.SetValue(result);
             _value1.SetValue(result);
-            Debug.WriteLine($"2: {value1} {_curOp} {value2} = {result}");
+            // Debug.WriteLine($"2: {value1} {_curOp} {value2} = {result}");
             Digits = _result.Digits;
         }
 
+        /// <summary>
+        /// 演算子トークンを設定する.
+        /// </summary>
         public void SetOp(Operator token)
         {
             _curOp = token;
         }
+
+        /// <summary>
+        /// 演算子トークンをクリアする.
+        /// </summary>
         public void ClearOp()
         {
             _curOp = Operator.None;
         }
-
 
     }
 }

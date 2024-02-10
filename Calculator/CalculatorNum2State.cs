@@ -13,32 +13,57 @@ namespace Calculator
         /// <summary>
         /// 2個目の数値の入力中の状態を表すクラス.
         /// </summary>
-        internal class CalculatorNum2State : CalculatorState
+        class CalculatorNum2State : CalculatorState
         {
+            /// <summary>
+            /// 数値系トークンの処理.
+            /// </summary>
+            /// <param name="core"> CalculatorCoreオブジェクト </param>
+            /// <param name="token"> 数値トークン </param>
+
             public override void ProcessNumber(CalculatorCore core, Number token)
             {
                 core.PutNum2(token);
                 core.SelectNum2();
 
             }
+
+            /// <summary>
+            /// 演算子系トークンの処理.
+            /// </summary>
+            /// <param name="core"> CalculatorCoreオブジェクト </param>
+            /// <param name="token"> 演算子トークン </param>
             public override void ProcessOperator(CalculatorCore core, Operator token)
             {
                 core.Eval();
                 core.SetOp(token);
                 core.ChangeState(opState);
             }
+
+            /// <summary>
+            /// イコールトークンの処理.
+            /// </summary>
+            /// <param name="core"> CalculatorCoreオブジェクト </param>
             public override void ProcessEqual(CalculatorCore core)
             {
                 core.Eval();
                 core.ChangeState(initState);
             }
 
+            /// <summary>
+            /// C(Clear)トークンの処理.
+            /// </summary>
+            /// <param name="core"> CalculatorCoreオブジェクト </param>
             public override void ProcessClear(CalculatorCore core)
             {
                 core.ClearNum2();
                 core.SelectNum2();
             }
 
+            /// <summary>
+            /// AC(All Clear)トークンの処理.
+            /// </summary>
+            /// <param name="core"> CalculatorCoreオブジェクト </param>
             public override void ProcessAllClear(CalculatorCore core)
             {
                 core.ClearNum1();
