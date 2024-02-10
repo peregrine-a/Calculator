@@ -54,6 +54,8 @@ namespace Calculator
                 core.ClearNum2();
                 core.ClearOp();
                 core.SelectNum1();
+                core.ClearError();
+
                 core.ChangeState(initState);
             }
 
@@ -67,6 +69,8 @@ namespace Calculator
                 core.ClearNum2();
                 core.ClearOp();
                 core.SelectNum1();
+                core.ClearError();
+
                 core.ChangeState(initState);
             }
 

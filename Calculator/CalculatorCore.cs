@@ -26,13 +26,23 @@ namespace Calculator
         /// </summary>
         public string Digits { get; private set; }
 
-        /* Member Variables */
+        /// <summary>
+        /// 現在の演算子設定
+        /// </summary>
+        public Operator CurOp { get; private set; }
+
+        /// <summary>
+        /// エラー状態かどうか
+        /// </summary>
+        public bool HasError { get; private set; }
+
+
+        /* Static Member Variables */
         private static readonly CalculatorState initState  = new CalculatorInitState();  
         private static readonly CalculatorState num1State  = new CalculatorNum1State();
         private static readonly CalculatorState num2State  = new CalculatorNum2State();
         private static readonly CalculatorState opState    = new CalculatorOperatorState();
         private static readonly CalculatorState errorState = new CalculatorErrorState();
-
 
         private static readonly Dictionary<Number, string> numDict = new Dictionary<Number, string>()
         {
@@ -52,18 +62,9 @@ namespace Calculator
         };
 
 
-
         private CalculatorState _curState = initState;
 
         private uint _maxDigits;
-
-        /* 最大の桁数に対応する, 計算結果の最大値 */
-        private decimal _minValue;
-        /* 最大の桁数に対応する, 計算結果の最小値 */
-        private decimal _maxValue;
-
-
-        private Operator _curOp = Operator.None;
 
         private CalculatorValue _value1 = null;
         private CalculatorValue _value2 = null;
@@ -78,18 +79,20 @@ namespace Calculator
         public CalculatorCore(uint maxDigits=20)
         {
             _maxDigits = maxDigits;
-            _maxValue  = (decimal) (  Math.Pow(10, maxDigits ) - 1);
-            _minValue  = (decimal) (- Math.Pow(10, maxDigits - 1) + 1);
             _value1 = new CalculatorValue(maxDigits);
             _value2 = new CalculatorValue(maxDigits);
-            // _result = new CalculatorValue(maxDigits);
-        }
+            Digits = "0";
+            CurOp =  Operator.None;
+            HasError = false;
 
-        /// <summary>
-        /// 数字(小数点を含む)ボタンの処理
-        /// </summary>
-        /// <param name="token"> 数字・小数点を表すトークン </param>
-        public void ProcessNumber(Number token)
+        // _result = new CalculatorValue(maxDigits);
+    }
+
+    /// <summary>
+    /// 数字(小数点を含む)ボタンの処理
+    /// </summary>
+    /// <param name="token"> 数字・小数点を表すトークン </param>
+    public void ProcessNumber(Number token)
         {
             // Debug.WriteLine($"ProcessNumber! {token}");
             _curState.ProcessNumber(this, token);
@@ -213,7 +216,7 @@ namespace Calculator
             try
             {
                 /* 四則演算の実行 */
-                switch (_curOp)
+                switch (CurOp)
                 {
                     case Operator.Plus:
                         result = value1 + value2;
@@ -241,19 +244,11 @@ namespace Calculator
                 return false;
             }
 
-            /* 整数部分の桁数が表示できるかどうかのチェック. */
-            // if ((result < _minValue) || (result > _maxValue))
-            // {
-            //     Debug.WriteLine($"hoge! {result} {_minValue} {_maxValue}");
-            //     return false;
-            // }
-
-            // _result.SetValue(result);
             bool status = _value1.SetValue(result);
             if (status == false)
                 return false;
 
-            // Debug.WriteLine($"2: {value1} {_curOp} {value2} = {result}");
+            // Debug.WriteLine($"{value1} {_curOp} {value2} = {result}");
             Digits = _value1.Digits;
 
             return true;
@@ -264,7 +259,7 @@ namespace Calculator
         /// </summary>
         public void SetOp(Operator token)
         {
-            _curOp = token;
+            CurOp = token;
         }
 
         /// <summary>
@@ -272,7 +267,7 @@ namespace Calculator
         /// </summary>
         public void ClearOp()
         {
-            _curOp = Operator.None;
+            CurOp = Operator.None;
         }
 
         /// <summary>
@@ -281,6 +276,16 @@ namespace Calculator
         public void NotifyError()
         {
             Digits = "Error.";
+            HasError = true;
         }
+
+        /// <summary>
+        /// エラーのクリア
+        /// </summary>
+        public void ClearError()
+        {
+            HasError = false;
+        }
+
     }
 }

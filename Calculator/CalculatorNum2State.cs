@@ -56,10 +56,13 @@ namespace Calculator
                 bool status = core.Eval();
                 if (status == false)
                 {
+                    core.ClearOp();
                     core.NotifyError();
                     core.ChangeState(errorState);
                     return;
                 }
+
+                core.ClearOp();
 
                 core.ChangeState(initState);
             }

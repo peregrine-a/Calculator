@@ -22,7 +22,7 @@ namespace Calculator
     public partial class MainWindow : Window
     {
         /* Member Variables */
-        private readonly CalculatorCore _core = new CalculatorCore(20);
+        private readonly CalculatorCore _core = new CalculatorCore();
 
         /// <summary>
         /// コンストラクタ
@@ -87,8 +87,7 @@ namespace Calculator
             }
 
             _core.ProcessNumber(token);
-            displayTextBox.Text = _core.Digits;
-
+            Update();
         }
 
         /// <summary>
@@ -121,7 +120,7 @@ namespace Calculator
             }
 
             _core.ProcessOperator(token);
-            displayTextBox.Text = _core.Digits;
+            Update();
         }
 
         /// <summary>
@@ -132,7 +131,7 @@ namespace Calculator
         private void equalButton_Click(object sender, RoutedEventArgs e)
         {
             _core.ProcessEqual();
-            displayTextBox.Text = _core.Digits;
+            Update();
         }
 
         /// <summary>
@@ -143,7 +142,7 @@ namespace Calculator
         private void acButton_Click(object sender, RoutedEventArgs e)
         {
             _core.ProcessAllClear();
-            displayTextBox.Text = _core.Digits;
+            Update();
         }
 
         /// <summary>
@@ -154,7 +153,71 @@ namespace Calculator
         private void cButton_Click(object sender, RoutedEventArgs e)
         {
             _core.ProcessClear();
+            Update();
+        }
+
+        /// <summary>
+        /// ディスプレイ表示の更新
+        /// </summary>
+        private void Update()
+        {
+            /* ディスプレイの表示更新 */
             displayTextBox.Text = _core.Digits;
+
+            /* 現在の演算子情報表示の更新 */
+            UpdateOperator();
+
+            /* エラーフラグの更新 */
+            UpdateErrorFlag();
+        }
+
+        /// <summary>
+        /// ディスプレイ表示の更新
+        /// </summary>
+        private void UpdateOperator()
+        {
+
+            Operator curOp = _core.CurOp;
+
+            switch (curOp)
+            {
+                case Operator.Plus:
+                    operatorTextBox.Text = "＋";
+                    break;
+
+                case Operator.Minus:
+                    operatorTextBox.Text = "－";
+                    break;
+
+                case Operator.Mult:
+                    operatorTextBox.Text = "×";
+                    break;
+
+                case Operator.Div:
+                    operatorTextBox.Text = "÷";
+                    break;
+
+                case Operator.None:
+                    operatorTextBox.Text = "";
+                    break;
+
+                default:
+                    // 通常通らない.
+                    operatorTextBox.Text = "？";
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// エラー情報の更新
+        /// </summary>
+        private void UpdateErrorFlag()
+        {
+            bool hasError = _core.HasError;
+            if (hasError)
+                errorTextBox.Text = "E";
+            else
+                errorTextBox.Text = "";
         }
     }
 }
