@@ -35,7 +35,14 @@ namespace Calculator
             /// <param name="token"> 演算子トークン </param>
             public override void ProcessOperator(CalculatorCore core, Operator token)
             {
-                core.Eval();
+                bool status = core.Eval();
+                if (status == false)
+                {
+                    core.NotifyError();
+                    core.ChangeState(errorState);
+                    return;
+                }
+
                 core.SetOp(token);
                 core.ChangeState(opState);
             }
@@ -46,7 +53,14 @@ namespace Calculator
             /// <param name="core"> CalculatorCoreオブジェクト </param>
             public override void ProcessEqual(CalculatorCore core)
             {
-                core.Eval();
+                bool status = core.Eval();
+                if (status == false)
+                {
+                    core.NotifyError();
+                    core.ChangeState(errorState);
+                    return;
+                }
+
                 core.ChangeState(initState);
             }
 

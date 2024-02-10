@@ -26,7 +26,6 @@ namespace Calculator
                 core.SelectNum1();
                 core.ClearOp();
 
-
                 core.ChangeState(num1State);
             }
 
@@ -82,7 +81,6 @@ namespace Calculator
             {
                 Debug.WriteLine("init_state:");            
             }
-
         }
 
 

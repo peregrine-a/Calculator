@@ -27,10 +27,12 @@ namespace Calculator
         public string Digits { get; private set; }
 
         /* Member Variables */
-        private static readonly CalculatorState initState = new CalculatorInitState();  
-        private static readonly CalculatorState num1State = new CalculatorNum1State();
-        private static readonly CalculatorState num2State = new CalculatorNum2State();
-        private static readonly CalculatorState opState   = new CalculatorOperatorState();
+        private static readonly CalculatorState initState  = new CalculatorInitState();  
+        private static readonly CalculatorState num1State  = new CalculatorNum1State();
+        private static readonly CalculatorState num2State  = new CalculatorNum2State();
+        private static readonly CalculatorState opState    = new CalculatorOperatorState();
+        private static readonly CalculatorState errorState = new CalculatorErrorState();
+
 
         private static readonly Dictionary<Number, string> numDict = new Dictionary<Number, string>()
         {
@@ -53,7 +55,13 @@ namespace Calculator
 
         private CalculatorState _curState = initState;
 
-        private uint _maxDigits = 20 /* default */;
+        private uint _maxDigits;
+
+        /* 最大の桁数に対応する, 計算結果の最大値 */
+        private decimal _minValue;
+        /* 最大の桁数に対応する, 計算結果の最小値 */
+        private decimal _maxValue;
+
 
         private Operator _curOp = Operator.None;
 
@@ -70,6 +78,8 @@ namespace Calculator
         public CalculatorCore(uint maxDigits=20)
         {
             _maxDigits = maxDigits;
+            _maxValue  = (decimal) (  Math.Pow(10, maxDigits ) - 1);
+            _minValue  = (decimal) (- Math.Pow(10, maxDigits - 1) + 1);
             _value1 = new CalculatorValue(maxDigits);
             _value2 = new CalculatorValue(maxDigits);
             _result = new CalculatorValue(maxDigits);
@@ -193,36 +203,57 @@ namespace Calculator
         /// <summary>
         /// 現在の数値・演算子を用いて計算を行う.
         /// </summary>
-        public void Eval()
+        public bool Eval()
         {
             decimal value1 = _value1.GetValue();
             decimal value2 = _value2.GetValue();
             decimal result = 0;
 
-            /* 四則演算の実行 */
-            switch (_curOp)
+            /* 演算実行. オーバーフロー, ゼロ除算は検出する. */
+            try
             {
-                case Operator.Plus:
-                    result = value1 + value2;
-                    break;
-                case Operator.Minus:
-                    result = value1 - value2;
-                    break;
-                case Operator.Mult:
-                    result = value1 * value2;
-                    break;
-                case Operator.Div:
-                    result = value1 / value2;
-                    break;
-                default:
-                    result = value1;
-                    break;
+                /* 四則演算の実行 */
+                switch (_curOp)
+                {
+                    case Operator.Plus:
+                        result = value1 + value2;
+                        break;
+                    case Operator.Minus:
+                        result = value1 - value2;
+                        break;
+                    case Operator.Mult:
+                        result = value1 * value2;
+                        break;
+                    case Operator.Div:
+                        result = value1 / value2;
+                        break;
+                    default:
+                        result = value1;
+                        break;
+                }
+            }
+            catch(OverflowException e)
+            {
+                return false;
+            }
+            catch(DivideByZeroException e)
+            {
+                return false;
+            }
+
+            /* 整数部分の桁数が表示できるかどうかのチェック. */
+            if ((result < _minValue) || (result > _maxValue))
+            {
+                Debug.WriteLine($"hoge! {result} {_minValue} {_maxValue}");
+                return false;
             }
 
             _result.SetValue(result);
             _value1.SetValue(result);
             // Debug.WriteLine($"2: {value1} {_curOp} {value2} = {result}");
             Digits = _result.Digits;
+
+            return true;
         }
 
         /// <summary>
@@ -241,5 +272,12 @@ namespace Calculator
             _curOp = Operator.None;
         }
 
+        /// <summary>
+        /// エラー発生の通知
+        /// </summary>
+        public void NotifyError()
+        {
+            Digits = "Error.";
+        }
     }
 }
