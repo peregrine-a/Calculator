@@ -53,12 +53,6 @@
                  Text="{Binding CurOp, Mode=OneWay}"></TextBox>
 
         <!-- 電卓計算結果表示用のテキストボックス -->
-        <!--
-        <TextBox x:Name="displayTextBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"
-                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20" IsReadOnly="True">0</TextBox>
-        -->
-
         <TextBox x:Name="displayTextBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20" IsReadOnly="True" Text="{Binding Digits, Mode=OneWay}"></TextBox>
