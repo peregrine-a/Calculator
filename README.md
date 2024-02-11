@@ -15,7 +15,18 @@ WPF(Windows Media Foundation)を用いた電卓アプリです。
  * .NET 8.0
  * WPF
 
+## 起動方法
 
+起動方法は下記の通りです.
+
+ 1. 下記のGitリポジトリをクローンして下さい.
+    * リポジトリ: https://github.com/peregrine-a/Calculator.git
+    * ブランチ: master
+    
+ 2. リポジトリ直下の"Calculator.sln"をVisual Studioでオープンして下さい.
+
+ 3. ビルドして実行してください.
+    ![VS Build](images/RunVisualStudio.png)
 
 ## UI・動作仕様
 
@@ -92,15 +103,7 @@ UIは下図の通りです.
 * エラー状態ではClearボタン("C")またはAll Clearボタン("AC")以外のボタンは受け付けません.
 * Clearボタン("C")またはAll Clearボタン("AC")を押すと, 初期状態に戻ります.
 
-## 使い方
 
-使い方は下記の通りです.
-
- 1. 下記のGitリポジトリをクローンして下さい.
-    
- 2. リポジトリ直下の**Calculator.sln**をオープンして下さい.
-
- 3. T.B.D.
 
 ## 設計詳細
 
