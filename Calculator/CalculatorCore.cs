@@ -68,7 +68,6 @@ namespace Calculator
 
         private CalculatorValue _value1 = null;
         private CalculatorValue _value2 = null;
-        // private CalculatorValue _result = null;
 
         /* Methods */
 
@@ -85,7 +84,6 @@ namespace Calculator
             CurOp =  Operator.None;
             HasError = false;
 
-        // _result = new CalculatorValue(maxDigits);
         }
 
         /// <summary>
