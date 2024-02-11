@@ -43,17 +43,25 @@
         <!-- エラー表示用の表示用のテキストボックス -->
         <TextBox x:Name="errorTextBox" Grid.Row="0" Grid.Column="3"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                 VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="12" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" IsReadOnly="True"></TextBox>
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="12" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" IsReadOnly="True"
+                 Text="{Binding HasError, Mode=OneWay}"></TextBox>
 
         <!-- 現在選択中の演算子表示用のテキストボックス -->
         <TextBox x:Name="operatorTextBox" Grid.Row="0" Grid.Column="4"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                 VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="12" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" IsReadOnly="True"></TextBox>
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="12" Background="{DynamicResource {x:Static SystemColors.InfoBrushKey}}" IsReadOnly="True"
+                 Text="{Binding CurOp, Mode=OneWay}"></TextBox>
 
         <!-- 電卓計算結果表示用のテキストボックス -->
+        <!--
         <TextBox x:Name="displayTextBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20" IsReadOnly="True">0</TextBox>
+        -->
+
+        <TextBox x:Name="displayTextBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"
+                 VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20" IsReadOnly="True" Text="{Binding Digits, Mode=OneWay}"></TextBox>
 
         <!-- 数字・小数点ボタン -->
         <Button x:Name="numButton0"   Grid.Row="6" Grid.Column="0" FontSize="16" Click="number_Click">0</Button>

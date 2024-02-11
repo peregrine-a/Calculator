@@ -22,7 +22,10 @@ namespace Calculator
     public partial class MainWindow : Window
     {
         /* Member Variables */
-        private readonly CalculatorCore _core = new CalculatorCore();
+        /// <summary>
+        /// 電卓のViewModel
+        /// </summary>
+        private readonly CalculatorViewModel _viewModel;
 
         /// <summary>
         /// コンストラクタ
@@ -30,6 +33,10 @@ namespace Calculator
         public MainWindow()
         {
             InitializeComponent();
+
+            /* ViewModelを生成してDataContextに登録する. */
+            _viewModel = new CalculatorViewModel();
+            DataContext = _viewModel;
         }
 
         /// <summary>
@@ -86,8 +93,7 @@ namespace Calculator
                     break;
             }
 
-            _core.ProcessNumber(token);
-            Update();
+            _viewModel.ProcessNumber(token);
         }
 
         /// <summary>
@@ -119,8 +125,7 @@ namespace Calculator
                     break;
             }
 
-            _core.ProcessOperator(token);
-            Update();
+            _viewModel.ProcessOperator(token);
         }
 
         /// <summary>
@@ -130,8 +135,7 @@ namespace Calculator
         /// <param name="e"> イベントパラメータ </param>
         private void equalButton_Click(object sender, RoutedEventArgs e)
         {
-            _core.ProcessEqual();
-            Update();
+            _viewModel.ProcessEqual();
         }
 
         /// <summary>
@@ -141,8 +145,7 @@ namespace Calculator
         /// <param name="e"> イベントパラメータ </param>
         private void acButton_Click(object sender, RoutedEventArgs e)
         {
-            _core.ProcessAllClear();
-            Update();
+            _viewModel.ProcessAllClear();
         }
 
         /// <summary>
@@ -152,72 +155,7 @@ namespace Calculator
         /// <param name="e"> イベントパラメータ </param>
         private void cButton_Click(object sender, RoutedEventArgs e)
         {
-            _core.ProcessClear();
-            Update();
-        }
-
-        /// <summary>
-        /// ディスプレイ表示の更新
-        /// </summary>
-        private void Update()
-        {
-            /* ディスプレイの表示更新 */
-            displayTextBox.Text = _core.Digits;
-
-            /* 現在の演算子情報表示の更新 */
-            UpdateOperator();
-
-            /* エラーフラグの更新 */
-            UpdateErrorFlag();
-        }
-
-        /// <summary>
-        /// ディスプレイ表示の更新
-        /// </summary>
-        private void UpdateOperator()
-        {
-
-            Operator curOp = _core.CurOp;
-
-            switch (curOp)
-            {
-                case Operator.Plus:
-                    operatorTextBox.Text = "＋";
-                    break;
-
-                case Operator.Minus:
-                    operatorTextBox.Text = "－";
-                    break;
-
-                case Operator.Mult:
-                    operatorTextBox.Text = "×";
-                    break;
-
-                case Operator.Div:
-                    operatorTextBox.Text = "÷";
-                    break;
-
-                case Operator.None:
-                    operatorTextBox.Text = "";
-                    break;
-
-                default:
-                    // 通常通らない.
-                    operatorTextBox.Text = "？";
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// エラー情報の更新
-        /// </summary>
-        private void UpdateErrorFlag()
-        {
-            bool hasError = _core.HasError;
-            if (hasError)
-                errorTextBox.Text = "E";
-            else
-                errorTextBox.Text = "";
+            _viewModel.ProcessClear();
         }
     }
 }
