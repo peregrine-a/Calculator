@@ -6,12 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Annotations;
+using System.Windows.Input;
 
 namespace Calculator
 {
     internal class CalculatorViewModel : INotifyPropertyChanged
     {
         /* Properties */
+
+        /// <summary>
+        /// ViewModelに対するコマンドオブジェクト
+        /// </summary>
+        public ICommand CalcCommand { get; private set; }
+
         /// <summary>
         /// 電卓の計算結果値
         /// </summary>
@@ -33,61 +40,73 @@ namespace Calculator
         public string HasError { get; private set; }
 
 
+        /* Member Variables */
+
+        /// <summary>
+        /// 電卓コアオブジェクト
+        /// </summary>
         private readonly CalculatorCore _core = new CalculatorCore(20);
 
+        /* Methods */
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public CalculatorViewModel()
         {
+            CalcCommand = new CalculatorCommand(this);
         }
 
         /// <summary>
-        /// 数字(小数点を含む)ボタンの処理
+        /// ボタンの処理
         /// </summary>
-        /// <param name="token"> 数字・小数点を表すトークン </param>
-        public void ProcessNumber(Number token)
+        /// <param name="parameter"> ボタンの種別を表す文字列. </param>
+        public void Process(string parameter)
         {
-            _core.ProcessNumber(token);
-            _Update();
-        }
+            /* 数値系 */
+            Number numToken = _GetNumberToken(parameter);
+            if (numToken != Number.None)
+            {
+                _core.ProcessNumber(numToken);
+                _Update();
+                return;
+            }
 
-        /// <summary>
-        /// 演算子(加減乗除)ボタンの処理
-        /// </summary>
-        /// <param name="token"> 演算子を表すトークン </param>
-        public void ProcessOperator(Operator token)
-        {
-            _core.ProcessOperator(token);
-            _Update();
-        }
+            /* 演算子系 */
+            Operator opToken = _GetOperatorToken(parameter);
+            if (opToken != Operator.None)
+            {
+                _core.ProcessOperator(opToken);
+                _Update();
+                return;
+            }
 
-        /// <summary>
-        /// イコールボタンの処理
-        /// </summary>
-        public void ProcessEqual()
-        {
-            _core.ProcessEqual();
-            _Update();
-        }
+            /* イコール */
+            if (parameter == "=")
+            {
+                _core.ProcessEqual();
+                _Update();
+                return;
+            }
 
-        /// <summary>
-        /// ACボタンの処理
-        /// </summary>
-        public void ProcessAllClear()
-        {
-            _core.ProcessAllClear();
-            _Update();
-        }
+            /* Clear */
+            if (parameter == "c")
+            {
+                _core.ProcessClear();
+                _Update();
+                return;
+            }
 
-        /// <summary>
-        /// Cボタンの処理
-        /// </summary>
-        public void ProcessClear()
-        {
-            _core.ProcessClear();
-            _Update();
+            /* All Clear */
+            if (parameter == "ac")
+            {
+                _core.ProcessAllClear();
+                _Update();
+                return;
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
 
         /// <summary>
         /// プロパティの更新
@@ -96,10 +115,10 @@ namespace Calculator
         {
             Result   = _core.Result;
             Digits   = _core.Digits;
-            Debug.WriteLine($"Digits= '{Digits}'");
             CurOp    = _GetOperator(_core.CurOp);
             HasError = _GetErrorFlag(_core.HasError);
 
+            /* View側に値の変更を通知する */
             PropertyChanged(this, new PropertyChangedEventArgs("Digits"));
             PropertyChanged(this, new PropertyChangedEventArgs("CurOp"));
             PropertyChanged(this, new PropertyChangedEventArgs("HasError"));
@@ -147,6 +166,64 @@ namespace Calculator
                 return "";
         }
 
+        /// <summary>
+        /// パラメータ文字列から数値トークンを取得する.
+        /// </summary>
+        /// <param name="parameter"> パラメータ文字列 </param>
+        /// <returns> 数値トークン </returns>
+        private static Number _GetNumberToken(string parameter)
+        {
+            switch (parameter)
+            {
+                case "0":
+                    return Number.Zero;
+                case "00":
+                    return Number.DoubleZero;
+                case "1":
+                    return Number.One;
+                case "2":
+                    return Number.Two;
+                case "3":
+                    return Number.Three;
+                case "4":
+                    return Number.Four;
+                case "5":
+                    return Number.Five;
+                case "6":
+                    return Number.Six;
+                case "7":
+                    return Number.Seven;
+                case "8":
+                    return Number.Eight;
+                case "9":
+                    return Number.Nine;
+                case ".":
+                    return Number.Dot;
+                default:
+                    return Number.None;
+            }
+        }
 
+        /// <summary>
+        /// パラメータ文字列から演算子トークンを取得する.
+        /// </summary>
+        /// <param name="parameter"> パラメータ文字列 </param>
+        /// <returns> 演算子トークン </returns>
+        private static Operator _GetOperatorToken(string parameter)
+        {
+            switch (parameter)
+            {
+                case "+":
+                    return Operator.Plus;
+                case "-":
+                    return Operator.Minus;
+                case "*":
+                    return Operator.Mult;
+                case "/":
+                    return Operator.Div;
+                default:
+                    return Operator.None;
+            }
+        }
     }
 }

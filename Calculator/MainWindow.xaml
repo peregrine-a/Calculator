@@ -64,36 +64,36 @@
                  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20" IsReadOnly="True" Text="{Binding Digits, Mode=OneWay}"></TextBox>
 
         <!-- 数字・小数点ボタン -->
-        <Button x:Name="numButton0"   Grid.Row="6" Grid.Column="0" FontSize="16" Click="number_Click">0</Button>
-        <Button x:Name="numButton00"  Grid.Row="6" Grid.Column="1" FontSize="16" Click="number_Click">00</Button>
-        <Button x:Name="numButtonDot" Grid.Row="6" Grid.Column="2" FontSize="16" Click="number_Click">.</Button>
-        <Button x:Name="numButton1"   Grid.Row="5" Grid.Column="0" FontSize="16" Click="number_Click">1</Button>
-        <Button x:Name="numButton2"   Grid.Row="5" Grid.Column="1" FontSize="16" Click="number_Click">2</Button>
-        <Button x:Name="numButton3"   Grid.Row="5" Grid.Column="2" FontSize="16" Click="number_Click">3</Button>
-        <Button x:Name="numButton4"   Grid.Row="4" Grid.Column="0" FontSize="16" Click="number_Click">4</Button>
-        <Button x:Name="numButton5"   Grid.Row="4" Grid.Column="1" FontSize="16" Click="number_Click">5</Button>
-        <Button x:Name="numButton6"   Grid.Row="4" Grid.Column="2" FontSize="16" Click="number_Click">6</Button>
-        <Button x:Name="numButton7"   Grid.Row="3" Grid.Column="0" FontSize="16" Click="number_Click">7</Button>
-        <Button x:Name="numButton8"   Grid.Row="3" Grid.Column="1" FontSize="16" Click="number_Click">8</Button>
-        <Button x:Name="numButton9"   Grid.Row="3" Grid.Column="2" FontSize="16" Click="number_Click">9</Button>
+        <Button x:Name="numButton0"   Grid.Row="6" Grid.Column="0" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="0" >0</Button>
+        <Button x:Name="numButton00"  Grid.Row="6" Grid.Column="1" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="00" >00</Button>
+        <Button x:Name="numButtonDot" Grid.Row="6" Grid.Column="2" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="." >.</Button>
+        <Button x:Name="numButton1"   Grid.Row="5" Grid.Column="0" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="1" >1</Button>
+        <Button x:Name="numButton2"   Grid.Row="5" Grid.Column="1" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="2" >2</Button>
+        <Button x:Name="numButton3"   Grid.Row="5" Grid.Column="2" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="3" >3</Button>
+        <Button x:Name="numButton4"   Grid.Row="4" Grid.Column="0" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="4" >4</Button>
+        <Button x:Name="numButton5"   Grid.Row="4" Grid.Column="1" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="5" >5</Button>
+        <Button x:Name="numButton6"   Grid.Row="4" Grid.Column="2" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="6" >6</Button>
+        <Button x:Name="numButton7"   Grid.Row="3" Grid.Column="0" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="7" >7</Button>
+        <Button x:Name="numButton8"   Grid.Row="3" Grid.Column="1" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="8" >8</Button>
+        <Button x:Name="numButton9"   Grid.Row="3" Grid.Column="2" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="9" >9</Button>
 
         <!--- M+/M-/MRCボタン -->
-        <Button x:Name="mpButton"     Grid.Row="2" Grid.Column="0" FontSize="16" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">M+</Button>
-        <Button x:Name="mmButton"     Grid.Row="2" Grid.Column="1" FontSize="16" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">M-</Button>
-        <Button x:Name="mrcButton"    Grid.Row="2" Grid.Column="2" FontSize="16" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">MRC</Button>
+        <Button x:Name="mpButton"     Grid.Row="2" Grid.Column="0" FontSize="16" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" >M+</Button>
+        <Button x:Name="mmButton"     Grid.Row="2" Grid.Column="1" FontSize="16" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" >M-</Button>
+        <Button x:Name="mrcButton"    Grid.Row="2" Grid.Column="2" FontSize="16" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" >MRC</Button>
 
         <!-- C/ACボタン -->
-        <Button x:Name="cButton"      Grid.Row="3" Grid.Column="3" FontSize="16" Click="cButton_Click">C</Button>
-        <Button x:Name="acButton"     Grid.Row="3" Grid.Column="4" FontSize="16" Click="acButton_Click">AC</Button>
+        <Button x:Name="cButton"      Grid.Row="3" Grid.Column="3" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="c" >C</Button>
+        <Button x:Name="acButton"     Grid.Row="3" Grid.Column="4" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="ac" >AC</Button>
 
         <!-- 演算子系ボタン -->
-        <Button x:Name="plusButton"   Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" Click="operator_Click">＋</Button>
-        <Button x:Name="minusButton"  Grid.Row="5" Grid.Column="4" Click="operator_Click">－</Button>
-        <Button x:Name="multButton"   Grid.Row="4" Grid.Column="3" Click="operator_Click">×</Button>
-        <Button x:Name="divButton"    Grid.Row="4" Grid.Column="4" Click="operator_Click">÷</Button>
+        <Button x:Name="plusButton"   Grid.Row="5" Grid.Column="3" Grid.RowSpan="2" Command="{Binding CalcCommand}" CommandParameter="+">＋</Button>
+        <Button x:Name="minusButton"  Grid.Row="5" Grid.Column="4" Command="{Binding CalcCommand}" CommandParameter="-" >－</Button>
+        <Button x:Name="multButton"   Grid.Row="4" Grid.Column="3" Command="{Binding CalcCommand}" CommandParameter="*" >×</Button>
+        <Button x:Name="divButton"    Grid.Row="4" Grid.Column="4" Command="{Binding CalcCommand}" CommandParameter="/" >÷</Button>
 
         <!-- その他制御系ボタン -->
-        <Button x:Name="equalButton"  Grid.Row="6" Grid.Column="4" Click="equalButton_Click">＝</Button>
+        <Button x:Name="equalButton"  Grid.Row="6" Grid.Column="4" Command="{Binding CalcCommand}" CommandParameter="=">＝</Button>
 
 
     </Grid>
