@@ -13,6 +13,17 @@ namespace Calculator
 {
     internal class CalculatorValue
     {
+        /* Enums */
+        /// <summary>
+        /// 内部ステートの定義
+        /// </summary>
+        public enum State
+        {
+            Init,    // 初期状態
+            Integer, // 整数部分の解析中
+            Frac,    // 小数部分の解析中
+        };
+
         /* Properties */
 
         /// <summary>
@@ -26,23 +37,16 @@ namespace Calculator
             }
         }
 
+        public State CurState { get; private set; } = State.Init;
+
         /// <summary>
-        /// 内部ステートの定義
+        /// 現在の桁表示文字列
         /// </summary>
-        enum State
-        {
-            Init,    // 初期状態
-            Integer, // 整数部分の解析中
-            Frac,    // 小数部分の解析中
-        };
-
         private string _digits = String.Empty;
-
-        /// <summary> 現在の内部ステート </summary>
-        State _curState = State.Init;
 
         /// <summary> 最大桁数 </summary>
         uint _maxDigits;
+
 
         /* Methods */
 
@@ -98,7 +102,7 @@ namespace Calculator
         public void Reset()
         {
             _digits = String.Empty;
-            _curState = State.Init;
+            CurState = State.Init;
         }
 
         /// <summary>
@@ -106,7 +110,7 @@ namespace Calculator
         /// </summary>
         public void DebugPrint()
         {
-            Debug.WriteLine($"state= {_curState} _digits= '{_digits}'");
+            Debug.WriteLine($"state= {CurState} _digits= '{_digits}'");
         }
 
         /// <summary>
@@ -115,7 +119,7 @@ namespace Calculator
         /// <param name="c"> 追加する文字. </param>
         private void _PutChar(char c)
         {
-            if (_curState == State.Init)
+            if (CurState == State.Init)
             {
                 if (c == '0')
                     return;
@@ -126,7 +130,7 @@ namespace Calculator
                         return;
 
                     _AppendChar(c);
-                    _curState = State.Integer;
+                    CurState = State.Integer;
                 }
                 else if (c == '.')
                 {
@@ -135,10 +139,10 @@ namespace Calculator
 
                     _AppendChar('0');
                     _AppendChar(c);
-                    _curState = State.Frac;
+                    CurState = State.Frac;
                 }
             }
-            else if (_curState == State.Integer)
+            else if (CurState == State.Integer)
             {
                 if (('0' <= c) && (c <= '9'))
                 {
@@ -153,10 +157,10 @@ namespace Calculator
                         return;
 
                     _AppendChar(c);
-                    _curState = State.Frac;
+                    CurState = State.Frac;
                 }
             }
-            else if (_curState == State.Frac)
+            else if (CurState == State.Frac)
             {
                 if (('0' <= c) && (c <= '9'))
                 {
@@ -182,7 +186,7 @@ namespace Calculator
         /// 整数桁文字列に指定された文字数を追加できるかどうか確認する.
         /// </summary>
         /// <param name="numChars">追加する文字数</param>
-        /// <retval> </retval>
+        /// <returns> 追加できるかどうかのフラグ </returns>
         private bool _CanAppend(uint numChars)
         {
             return ((_digits.Length + numChars) <= _maxDigits);
