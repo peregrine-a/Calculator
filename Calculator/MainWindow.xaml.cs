@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace Calculator
 {
@@ -20,9 +21,22 @@ namespace Calculator
     /// </summary>
     public partial class MainWindow : Window
     {
+        /* Member Variables */
+        /// <summary>
+        /// 電卓のViewModel
+        /// </summary>
+        private readonly CalculatorViewModel _viewModel;
+
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+
+            /* ViewModelを生成してDataContextに登録する. */
+            _viewModel = new CalculatorViewModel();
+            DataContext = _viewModel;
         }
     }
 }
