@@ -55,7 +55,7 @@
         <!-- 電卓計算結果表示用のテキストボックス -->
         <TextBox x:Name="displayTextBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5"
                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20" IsReadOnly="True" Text="{Binding Digits, Mode=OneWay}"></TextBox>
+                 VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="20" IsReadOnly="True"  Text="{Binding Digits, Mode=OneWay, TargetNullValue='0'}"></TextBox>
 
         <!-- 数字・小数点ボタン -->
         <Button x:Name="numButton0"   Grid.Row="6" Grid.Column="0" FontSize="16" Command="{Binding CalcCommand}" CommandParameter="0" >0</Button>
