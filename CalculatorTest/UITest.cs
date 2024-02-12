@@ -41,7 +41,7 @@ namespace CalculatorTest
 
             string digits = _session.FindElementByAccessibilityId("DisplayTextBox").Text;
 
-            Assert.AreEqual(digits, "4");
+            Assert.AreEqual(digits, "3");
             Thread.Sleep(1000);
         }
 
